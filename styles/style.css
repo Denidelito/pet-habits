@@ -1,3 +1,83 @@
 * {
     box-sizing: border-box;
 }
+
+body {
+    font-family: "Comfortaa", sans-serif;
+    background-color: #F3F6FD;
+    margin: 0;
+}
+
+.app {
+    display: flex;
+}
+
+.menu {
+    width: 125px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    background-color: #FBFAFF;
+    height: 100vh;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav__item {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    border: none;
+    box-shadow: 0 14px 8px 0 rgba(62, 107, 224, 0.12);
+    background-color: white;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.nav__item > img {
+    transition: .3s;
+}
+
+.nav__item:hover {
+    background-color: #5051F9;
+}
+
+.nav__item:hover > img {
+    filter: brightness(0) invert(1);
+}
+
+.nav__item.nav__item_active {
+    background-color: #5051F9;
+}
+.nav__item.nav__item_active > img {
+    filter: brightness(0) invert(1);
+}
+
+.nav__add {
+    width: 46px;
+    height: 46px;
+    cursor: pointer;
+    border-radius: 14px;
+    background-color: transparent;
+    border: 1px solid #5051F9;
+    opacity: .4;
+    transition: .3s;
+}
+
+.nav__add:hover {
+    opacity: 1;
+}
