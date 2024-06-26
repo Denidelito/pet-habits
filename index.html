@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Hobbit app</title>
+    <title>Hobbit app ALGA</title>
     <meta http-equiv="X-UI-Comatible" content="IE-edga">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,25 +13,58 @@
 </head>
 <body>
 <div class="app">
-    <div class="menu">
+    <div class="panel">
         <img width="66" height="71" src="./images/logo_hobbit.svg" alt="Логотип Hobbit" class="menu__logo">
-        <div class="nav">
-            <nav class="nav__list">
-                <button class="nav__item nav__item_active">
+        <div class="menu">
+            <nav class="menu__list">
+                <button class="menu__item nav__item_active">
                     <img src="./images/icon-sport.svg" alt="Иконка гантели">
                 </button>
-                <button class="nav__item">
+                <button class="menu__item">
                     <img src="./images/icon-bottle.svg" alt="Иконка бутылки">
                 </button>
-                <button class="nav__item">
+                <button class="menu__item">
                     <img src="./images/icon-food.svg" alt="Иконка еды">
                 </button>
             </nav>
-            <button class="nav__add">
+            <button class="menu__add">
                 <img src="./images/icon-add.svg" alt="Иконка добавления привычки">
             </button>
         </div>
     </div>
+    <main class="content">
+        <header class="content__header">
+            <h1>Отжимания ALGA</h1>
+            <div class="progress">
+                <div class="progress__header">
+                    <div class="progress__name">Прогресс</div>
+                    <div class="progress__percent">80%</div>
+                </div>
+                <div class="progress__bar">
+                    <div class="progress__line"></div>
+                </div>
+            </div>
+        </header>
+        <div class="tasks">
+            <div class="task">
+                <div class="task__day">День 1</div>
+                <div class="task__comment">Первый подход всегда даётся тяжело</div>
+                <button class="task__delete">
+                    <img width="24" height="24" src="./images/icon-delete.svg" alt="Удаление дня">
+                </button>
+            </div>
+            <div class="task">
+                <div class="task__day">День 2</div>
+                <div class="task__form">
+                    <label class="task__input">
+                        <img src="./images/icon-comments.svg" alt="Поле ввода коментария">
+                        <input type="text" placeholder="Комментарий">
+                    </label>
+                    <button class="task__add">Готово</button>
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
 </body>
 </html>
