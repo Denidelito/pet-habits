@@ -1,8 +1,11 @@
 'use strict'
-
-let habits = [];
 const HABITS_KEY = 'HABITS_KEY';
 
+
+let habits = [];
+const page = {
+    menu: document.querySelector('.menu__list'),
+}
 
 /* utils */
 function loadData () {
@@ -22,18 +25,43 @@ function saveData() {
 /* render */
 function renderMenu(activeHabit) {
     if (!activeHabit) {
-        return `Привычки с id ${activeHabit} не существует`;
+        console.error(`Привычки не существует`);
+        return
     }
 
-    for (habit of habits) {
-        const existed = document.querySelector(`menu-habit-${habit.id}`);
+    for (const habit of habits) {
+        const existed = document.querySelector(`[menu-habit-id="${habit.id}"]`);
 
-        console.log(habit);
+        if (!existed)  {
+            const element  = document.createElement('button');
+
+            element.setAttribute('menu-habit-id', habit.id);
+            element.classList.add('menu__item');
+            element.innerHTML = `<img src="./images/icon-${habit.icon}.svg" alt="Иконка ${habit.name}">`;
+
+            if (habit.id === activeHabit.id) {
+                element.classList.add('menu__item_active');
+            }
+
+            element.addEventListener('click',  ()  =>  {
+                renderMenu(habit);
+            });
+
+            page.menu.appendChild(element);
+
+            continue;
+        }
+
+        if (habit.id === activeHabit.id) {
+            existed.classList.add('menu__item_active');
+        } else  {
+            existed.classList.remove('menu__item_active');
+        }
     }
 }
 
-function rerender(activeHabbitsId) {
-    const activeHabit = habits.find(habit => habit.id === activeHabbitsId);
+function rerender(activeHabitsId) {
+    const activeHabit = habits.find(habit => habit.id === activeHabitsId);
 
     renderMenu(activeHabit);
 }
@@ -42,5 +70,5 @@ function rerender(activeHabbitsId) {
 /* init */
 (() => {
     loadData();
-    rerender(0);
+    rerender(1);
 })();

@@ -1,8 +1,28 @@
 [
   {
     "id": 1,
-    "icon": "Sport",
+    "icon": "sport",
     "name": "Отжимания",
+    "target": 10,
+    "days": [
+      {"comments": "Первый день"},
+      {"comments": "Второй день"}
+    ]
+  },
+  {
+    "id": 2,
+    "icon": "food",
+    "name": "Еда",
+    "target": 10,
+    "days": [
+      {"comments": "Первый день"},
+      {"comments": "Второй день"}
+    ]
+  },
+  {
+    "id": 3,
+    "icon": "bottle",
+    "name": "Вода",
     "target": 10,
     "days": [
       {"comments": "Первый день"},
