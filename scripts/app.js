@@ -12,6 +12,7 @@ const page = {
     },
     body:  {
         tasksList: document.querySelector('.tasks__list'),
+        taskAdd: document.querySelector('.task__list-add')
     }
 }
 
@@ -73,10 +74,12 @@ function rerenderHead(activeHabit) {
 }
 
 function rerenderBody(activeHabit) {
-    rerenderTask(activeHabit.days);
+    rerenderTask(activeHabit);
 }
 
-function rerenderTask(habitDays) {
+function rerenderTask(habits) {
+    const habitDays = habits.days;
+
     if (habitDays.length === 0)  {
         return
     }
@@ -107,8 +110,38 @@ function rerenderTask(habitDays) {
         taskDelete.addEventListener('click',  ()  =>   {
             habitDays.splice(habitIndex  -  1, 1);
             saveData();
+
+            rerenderTask(habits);
+            rerenderHead(habits);
         });
     }
+}
+
+function addTask(activeHabit) {
+    const habitDays  = activeHabit.days;
+    const taskDay = page.body.taskAdd.querySelector('.task__day');
+    const formInput = page.body.taskAdd.querySelector('input');
+    const formButton = page.body.taskAdd.querySelector('.task__button');
+
+    taskDay.innerText  = `День ${habitDays.length  +  1}`;
+
+    formButton.addEventListener('click',  ()  =>    {
+        if (!formInput.value)   {
+            return
+        }
+
+        habitDays.push({
+          comments: formInput.value,
+        })
+
+        saveData();
+
+        formInput.value  = '';
+        taskDay.innerText  = `День ${habitDays.length  +  1}`;
+
+        rerenderHead(activeHabit);
+        rerenderBody(activeHabit);
+    })
 }
 
 function rerender(activeHabitsId) {
@@ -122,6 +155,8 @@ function rerender(activeHabitsId) {
     rerenderMenu(activeHabit);
     rerenderHead(activeHabit);
     rerenderBody(activeHabit);
+
+    addTask(activeHabit);
 }
 
 

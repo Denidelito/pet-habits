@@ -213,7 +213,7 @@ body {
     outline: none;
 }
 
-.task__add {
+.task__button {
     font-size: 14px;
     border: none;
     background-color: #EDECFE;
@@ -225,6 +225,6 @@ body {
     cursor: pointer;
     transition: .3s;
 }
-.task__add:hover {
+.task__button:hover {
     background-color: #d8d7f8;
 }
