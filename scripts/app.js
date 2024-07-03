@@ -9,6 +9,9 @@ const page = {
         title: document.querySelector('.content__title'),
         progressLine: document.querySelector('.progress__line'),
         progressPercent: document.querySelector('.progress__percent')
+    },
+    body:  {
+        tasksList: document.querySelector('.tasks__list'),
     }
 }
 
@@ -65,8 +68,47 @@ function rerenderHead(activeHabit) {
     const header = page.header
 
     header.title.innerHTML  = activeHabit.name;
-    header.progressPercent.innerHTML = `${currentPercent}%`;
-    header.progressLine.style.width = `${currentPercent}%`;
+    header.progressPercent.innerHTML = `${currentPercent.toFixed(0)}%`;
+    header.progressLine.style.width = `${currentPercent.toFixed(0)}%`;
+}
+
+function rerenderBody(activeHabit) {
+    rerenderTask(activeHabit.days);
+}
+
+function rerenderTask(habitDays) {
+    if (habitDays.length === 0)  {
+        return
+    }
+
+    page.body.tasksList.innerHTML  = '';
+
+    for  (let habitIndex = habitDays.length; habitIndex > 0; habitIndex--) {
+        const habitDay = habitDays[habitIndex - 1];
+
+        const taskTemplate = document.createElement('div');
+        const taskDay = document.createElement('div');
+        const taskComment = document.createElement('div');
+        const taskDelete = document.createElement('button');
+
+        taskTemplate.classList.add('task');
+        taskDay.classList.add('task__day');
+        taskDay.innerText = `День ${habitDays.indexOf(habitDay) + 1}`;
+        taskComment.classList.add('task__comment');
+        taskComment.innerText = habitDay.comments;
+        taskDelete.classList.add('task__delete');
+        taskDelete.innerHTML = `<img width="24" height="24" src="./images/icon-delete.svg" alt="Удаление дня">`;
+
+        page.body.tasksList.appendChild(taskTemplate);
+        taskTemplate.appendChild(taskDay);
+        taskTemplate.appendChild(taskComment);
+        taskTemplate.appendChild(taskDelete);
+
+        taskDelete.addEventListener('click',  ()  =>   {
+            habitDays.splice(habitIndex  -  1, 1);
+            saveData();
+        });
+    }
 }
 
 function rerender(activeHabitsId) {
@@ -79,6 +121,7 @@ function rerender(activeHabitsId) {
 
     rerenderMenu(activeHabit);
     rerenderHead(activeHabit);
+    rerenderBody(activeHabit);
 }
 
 

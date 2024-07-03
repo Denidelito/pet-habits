@@ -130,17 +130,21 @@ body {
 }
 
 .progress__line {
+    transition: all .3s;
     height: 5px;
     border-radius: 4px;
     background-color: #5051F9;
     position: absolute;
 }
 
-.tasks {
+.tasks__list {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    padding-top: 12px;
 }
+
+
 
 .task {
     display: flex;
