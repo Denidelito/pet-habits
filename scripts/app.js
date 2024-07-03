@@ -77,8 +77,8 @@ function rerenderBody(activeHabit) {
     rerenderTask(activeHabit);
 }
 
-function rerenderTask(habits) {
-    const habitDays = habits.days;
+function rerenderTask(habit) {
+    const habitDays = habit.days;
 
     if (habitDays.length === 0)  {
         return
@@ -111,19 +111,24 @@ function rerenderTask(habits) {
             habitDays.splice(habitIndex  -  1, 1);
             saveData();
 
-            rerenderTask(habits);
-            rerenderHead(habits);
+            rerenderTask(habit);
+            rerenderAddTask(habit);
+            rerenderHead(habit);
         });
     }
 }
 
+function rerenderAddTask(habit) {
+    const taskDay = page.body.taskAdd.querySelector('.task__day');
+
+    taskDay.innerText  = `День ${habit.days.length + 1}`;
+}
+
 function addTask(activeHabit) {
     const habitDays  = activeHabit.days;
-    const taskDay = page.body.taskAdd.querySelector('.task__day');
     const formInput = page.body.taskAdd.querySelector('input');
     const formButton = page.body.taskAdd.querySelector('.task__button');
 
-    taskDay.innerText  = `День ${habitDays.length  +  1}`;
 
     formButton.addEventListener('click',  ()  =>    {
         if (!formInput.value)   {
@@ -137,9 +142,9 @@ function addTask(activeHabit) {
         saveData();
 
         formInput.value  = '';
-        taskDay.innerText  = `День ${habitDays.length  +  1}`;
 
         rerenderHead(activeHabit);
+        rerenderAddTask(activeHabit);
         rerenderBody(activeHabit);
     })
 }
@@ -155,6 +160,7 @@ function rerender(activeHabitsId) {
     rerenderMenu(activeHabit);
     rerenderHead(activeHabit);
     rerenderBody(activeHabit);
+    rerenderAddTask(activeHabit);
 
     addTask(activeHabit);
 }
