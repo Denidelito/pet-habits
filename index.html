@@ -38,13 +38,13 @@
         <div class="task__list-add">
             <div class="task">
                 <div class="task__day">-</div>
-                <div class="task__form">
+                <form class="task__form" onsubmit="addTask(event)">
                     <label class="task__input">
                         <img src="./images/icon-comments.svg" alt="Поле ввода коментария">
-                        <input type="text" placeholder="Комментарий">
+                        <input name="comment" type="text" placeholder="Комментарий">
                     </label>
-                    <button class="task__button">Готово</button>
-                </div>
+                    <button class="task__button" type="submit">Готово</button>
+                </form>
             </div>
             <div class="tasks__list">
             </div>

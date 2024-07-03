@@ -3,6 +3,7 @@ const HABITS_KEY = 'HABITS_KEY';
 
 
 let habits = [];
+let globalHabitId;
 const page = {
     menu: document.querySelector('.menu__list'),
     header: {
@@ -32,6 +33,23 @@ function saveData() {
 
 
 /* render */
+function rerender(activeHabitsId) {
+    globalHabitId = activeHabitsId;
+
+    page.body.taskAdd.addEventListener('submit', addTask);
+    const activeHabit = habits.find(habit => habit.id === activeHabitsId);
+
+    if (!activeHabit) {
+        console.error(`Привычки не существует`);
+        return
+    }
+
+    rerenderMenu(activeHabit);
+    rerenderHead(activeHabit);
+    rerenderBody(activeHabit);
+    rerenderAddTask(activeHabit);
+}
+
 function rerenderMenu(activeHabit) {
     for (const habit of habits) {
         const existed = document.querySelector(`[menu-habit-id="${habit.id}"]`);
@@ -108,12 +126,7 @@ function rerenderTask(habit) {
         taskTemplate.appendChild(taskDelete);
 
         taskDelete.addEventListener('click',  ()  =>   {
-            habitDays.splice(habitIndex  -  1, 1);
-            saveData();
-
-            rerenderTask(habit);
-            rerenderAddTask(habit);
-            rerenderHead(habit);
+            removeTask(habitIndex - 1);
         });
     }
 }
@@ -124,45 +137,55 @@ function rerenderAddTask(habit) {
     taskDay.innerText  = `День ${habit.days.length + 1}`;
 }
 
-function addTask(activeHabit) {
-    const habitDays  = activeHabit.days;
-    const formInput = page.body.taskAdd.querySelector('input');
-    const formButton = page.body.taskAdd.querySelector('.task__button');
 
+/* Actions */
+function addTask() {
+    event.preventDefault();
 
-    formButton.addEventListener('click',  ()  =>    {
-        if (!formInput.value)   {
-            return
-        }
+    const form = event.target;
+    const data = new FormData(event.target);
+    const comments = data.get('comment');
 
-        habitDays.push({
-          comments: formInput.value,
-        })
+    form['comment'].classList.remove('error');
 
-        saveData();
+    if (!comments)   {
+        form['comment'].classList.add('error');
 
-        formInput.value  = '';
-
-        rerenderHead(activeHabit);
-        rerenderAddTask(activeHabit);
-        rerenderBody(activeHabit);
-    })
-}
-
-function rerender(activeHabitsId) {
-    const activeHabit = habits.find(habit => habit.id === activeHabitsId);
-
-    if (!activeHabit) {
-        console.error(`Привычки не существует`);
         return
     }
 
-    rerenderMenu(activeHabit);
-    rerenderHead(activeHabit);
-    rerenderBody(activeHabit);
-    rerenderAddTask(activeHabit);
+    habits = habits.map(hobit => {
+        if  (hobit.id === globalHabitId)  {
+            return {
+                ...hobit,
+                days: hobit.days.concat({comments})
+            }
+        }
 
-    addTask(activeHabit);
+        return hobit;
+    })
+
+    form['comment'].value = '';
+
+    rerender(globalHabitId);
+
+    saveData();
+}
+
+function removeTask(habitIndex) {
+    habits = habits.map(habit => {
+        if (habit.id === globalHabitId)  {
+            return {
+                ...habit,
+                days: habit.days.splice(habitIndex  -  1, 1)
+            }
+        }
+
+        return habit;
+    })
+
+    rerender(globalHabitId);
+    saveData();
 }
 
 
