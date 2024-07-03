@@ -28,7 +28,7 @@ function saveData() {
 
 
 /* render */
-function renderMenu(activeHabit) {
+function rerenderMenu(activeHabit) {
     for (const habit of habits) {
         const existed = document.querySelector(`[menu-habit-id="${habit.id}"]`);
 
@@ -60,8 +60,8 @@ function renderMenu(activeHabit) {
     }
 }
 
-function renderHead(activeHabit) {
-    const currentPercent = activeHabit.days.length / activeHabit.target * 100;
+function rerenderHead(activeHabit) {
+    const currentPercent = activeHabit.days.length / activeHabit.target > 1 ? 100 : activeHabit.days.length / activeHabit.target * 100;
     const header = page.header
 
     header.title.innerHTML  = activeHabit.name;
@@ -77,8 +77,8 @@ function rerender(activeHabitsId) {
         return
     }
 
-    renderMenu(activeHabit);
-    renderHead(activeHabit);
+    rerenderMenu(activeHabit);
+    rerenderHead(activeHabit);
 }
 
 
