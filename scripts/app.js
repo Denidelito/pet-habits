@@ -5,6 +5,11 @@ const HABITS_KEY = 'HABITS_KEY';
 let habits = [];
 const page = {
     menu: document.querySelector('.menu__list'),
+    header: {
+        title: document.querySelector('.content__title'),
+        progressLine: document.querySelector('.progress__line'),
+        progressPercent: document.querySelector('.progress__percent')
+    }
 }
 
 /* utils */
@@ -24,11 +29,6 @@ function saveData() {
 
 /* render */
 function renderMenu(activeHabit) {
-    if (!activeHabit) {
-        console.error(`Привычки не существует`);
-        return
-    }
-
     for (const habit of habits) {
         const existed = document.querySelector(`[menu-habit-id="${habit.id}"]`);
 
@@ -44,7 +44,7 @@ function renderMenu(activeHabit) {
             }
 
             element.addEventListener('click',  ()  =>  {
-                renderMenu(habit);
+                rerender(habit.id)
             });
 
             page.menu.appendChild(element);
@@ -60,10 +60,25 @@ function renderMenu(activeHabit) {
     }
 }
 
+function renderHead(activeHabit) {
+    const currentPercent = activeHabit.days.length / activeHabit.target * 100;
+    const header = page.header
+
+    header.title.innerHTML  = activeHabit.name;
+    header.progressPercent.innerHTML = `${currentPercent}%`;
+    header.progressLine.style.width = `${currentPercent}%`;
+}
+
 function rerender(activeHabitsId) {
     const activeHabit = habits.find(habit => habit.id === activeHabitsId);
 
+    if (!activeHabit) {
+        console.error(`Привычки не существует`);
+        return
+    }
+
     renderMenu(activeHabit);
+    renderHead(activeHabit);
 }
 
 
