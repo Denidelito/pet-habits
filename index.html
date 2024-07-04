@@ -16,6 +16,7 @@
         <img width="66" height="71" src="./images/logo_hobbit.svg" alt="Логотип Habbits" class="menu__logo">
         <div class="menu">
             <nav class="menu__list">
+
             </nav>
             <button class="menu__add">
                 <img src="./images/icon-add.svg" alt="Иконка добавления привычки">
@@ -39,17 +40,48 @@
             <div class="task">
                 <div class="task__day">-</div>
                 <form class="task__form" onsubmit="addTask(event)">
-                    <label class="task__input">
+                    <label class="input">
                         <img src="./images/icon-comments.svg" alt="Поле ввода коментария">
                         <input name="comment" type="text" placeholder="Комментарий">
                     </label>
-                    <button class="task__button" type="submit">Готово</button>
+                    <button class="button" type="submit">Готово</button>
                 </form>
             </div>
             <div class="tasks__list">
             </div>
         </div>
     </main>
+    <div class="cover-bg cover-bg_hidden">
+        <div class="modal">
+            <h2 class="modal__title">Новая привычка</h2>
+            <form onsubmit="" class="modal__form">
+                <div>
+                    <p>Иконка</p>
+                    <div class="radio-group">
+                        <label class="radio-icon" for="icon-sport">
+                            <img src="./images/icon-sport.svg" alt="Иконка ${habit.name}">
+                            <input id="icon-sport" name="icon" type="radio" >
+                        </label>
+                        <label class="radio-icon" for="icon-bottle">
+                            <img src="./images/icon-bottle.svg" alt="Иконка ${habit.name}">
+                            <input id="icon-bottle" name="icon" type="radio" >
+                        </label>
+                        <label class="radio-icon" for="icon-food">
+                            <img class="img" src="./images/icon-food.svg" alt="Иконка ${habit.name}">
+                            <input id="icon-food" name="icon" type="radio" >
+                        </label>
+                    </div>
+                </div>
+                <label class="input">
+                    <input name="name" type="text" placeholder="Название">
+                </label>
+                <label class="input">
+                    <input name="target" type="text" placeholder="Цель">
+                </label>
+                <button class="button">Добавить</button>
+            </form>
+        </div>
+    </div>
 </div>
 <script src="scripts/app.js"></script>
 </body>
