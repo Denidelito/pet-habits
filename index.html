@@ -55,22 +55,26 @@
         <div class="modal">
             <h2 class="modal__title">Новая привычка</h2>
             <form onsubmit="" class="modal__form">
-                <div>
-                    <p>Иконка</p>
-                    <div class="radio-group">
-                        <label class="radio-icon" for="icon-sport">
-                            <img src="./images/icon-sport.svg" alt="Иконка ${habit.name}">
-                            <input id="icon-sport" name="icon" type="radio" >
-                        </label>
-                        <label class="radio-icon" for="icon-bottle">
-                            <img src="./images/icon-bottle.svg" alt="Иконка ${habit.name}">
-                            <input id="icon-bottle" name="icon" type="radio" >
-                        </label>
-                        <label class="radio-icon" for="icon-food">
-                            <img class="img" src="./images/icon-food.svg" alt="Иконка ${habit.name}">
-                            <input id="icon-food" name="icon" type="radio" >
-                        </label>
-                    </div>
+                <p class="modal__subtitle">Иконка</p>
+                <div class="radio-group">
+                    <label class="radio-label" for="icon-sport">
+                        <input id="icon-sport" name="icon" type="radio" checked>
+                        <span class="radio-icon">
+                                <img src="./images/icon-sport.svg" alt="Иконка ${habit.name}">
+                            </span>
+                    </label>
+                    <label class="radio-label" for="icon-bottle">
+                        <input id="icon-bottle" name="icon" type="radio" >
+                        <span class="radio-icon">
+                                <img src="./images/icon-bottle.svg" alt="Иконка ${habit.name}">
+                            </span>
+                    </label>
+                    <label class="radio-label" for="icon-food">
+                        <input id="icon-food" name="icon" type="radio" >
+                        <span class="radio-icon">
+                                <img class="img" src="./images/icon-food.svg" alt="Иконка ${habit.name}">
+                            </span>
+                    </label>
                 </div>
                 <label class="input">
                     <input name="name" type="text" placeholder="Название">
@@ -80,6 +84,9 @@
                 </label>
                 <button class="button">Добавить</button>
             </form>
+            <button class="modal__button-close">
+                <img width="24" height="24" src="./images/icon-close.svg" alt="Кнопка закрытия модального окна">
+            </button>
         </div>
     </div>
 </div>

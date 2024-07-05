@@ -217,6 +217,12 @@ body {
     display: flex;
     justify-content: center;
     gap: 25px;
+    margin-bottom: 20px;
+}
+
+
+.radio-label > input {
+    display: none;
 }
 
 .radio-icon {
@@ -238,22 +244,19 @@ body {
     transition: .3s;
 }
 
-.radio-icon > input {
-
-}
-
-.radio-icon input:checked ~ .img {
-    background-color: #5051F9;
-}
-.radio-icon > input:checked ~ .radio-icon {
+.radio-label input:checked ~ .radio-icon img {
     filter: brightness(0) invert(1);
+}
+
+.radio-label input:checked ~ .radio-icon {
+    background-color: #5051F9;
 }
 
 .radio-icon:hover {
     background-color: #5051F9;
 }
 
-.radio-icon:hover > img {
+.radio-icon:hover img {
     filter: brightness(0) invert(1);
 }
 
@@ -269,6 +272,7 @@ body {
     font-weight: 500;
     cursor: pointer;
     transition: .3s;
+    min-height: 39px;
 }
 .button:hover {
     background-color: #d8d7f8;
@@ -301,6 +305,33 @@ body {
     margin: 0 0 20px;
 }
 
-.modal__form > .input {
+.modal__subtitle {
+    margin-bottom: 10px;
+    color: #768396;
+}
+
+.modal__form {
+    text-align: center;
+}
+
+.modal__form .input {
     margin-bottom: 6px;
+}
+
+.modal__form .input:last-child {
+    margin-bottom: 20px;
+}
+
+.modal__button-close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    transition: .3s;
+}
+
+.modal__button-close:hover {
+    opacity: .75;
 }

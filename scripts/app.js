@@ -14,6 +14,10 @@ const page = {
     body:  {
         tasksList: document.querySelector('.tasks__list'),
         taskAdd: document.querySelector('.task__list-add')
+    },
+    modal: {
+        btnClose: document.querySelector('.modal__button-close'),
+        form: document.querySelector('.modal__form'),
     }
 }
 
@@ -188,6 +192,9 @@ function removeTask(habitIndex) {
     saveData();
 }
 
+function modal() {
+
+}
 
 /* init */
 (() => {
