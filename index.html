@@ -18,7 +18,7 @@
             <nav class="menu__list">
 
             </nav>
-            <button class="menu__add">
+            <button class="menu__add" onclick="toggleModal()">
                 <img src="./images/icon-add.svg" alt="Иконка добавления привычки">
             </button>
         </div>
@@ -54,23 +54,23 @@
     <div class="cover-bg cover-bg_hidden">
         <div class="modal">
             <h2 class="modal__title">Новая привычка</h2>
-            <form onsubmit="" class="modal__form">
+            <form onsubmit="addHabit()" class="modal__form">
                 <p class="modal__subtitle">Иконка</p>
                 <div class="radio-group">
                     <label class="radio-label" for="icon-sport">
-                        <input id="icon-sport" name="icon" type="radio" checked>
+                        <input id="icon-sport" name="icon" value="sport" type="radio" checked>
                         <span class="radio-icon">
                                 <img src="./images/icon-sport.svg" alt="Иконка ${habit.name}">
                             </span>
                     </label>
                     <label class="radio-label" for="icon-bottle">
-                        <input id="icon-bottle" name="icon" type="radio" >
+                        <input id="icon-bottle" name="icon" value="bottle" type="radio" >
                         <span class="radio-icon">
                                 <img src="./images/icon-bottle.svg" alt="Иконка ${habit.name}">
                             </span>
                     </label>
                     <label class="radio-label" for="icon-food">
-                        <input id="icon-food" name="icon" type="radio" >
+                        <input id="icon-food" name="icon" value="food" type="radio" >
                         <span class="radio-icon">
                                 <img class="img" src="./images/icon-food.svg" alt="Иконка ${habit.name}">
                             </span>
@@ -82,9 +82,9 @@
                 <label class="input">
                     <input name="target" type="text" placeholder="Цель">
                 </label>
-                <button class="button">Добавить</button>
+                <button class="button" onclick="">Добавить</button>
             </form>
-            <button class="modal__button-close">
+            <button class="modal__button-close" onclick="toggleModal()">
                 <img width="24" height="24" src="./images/icon-close.svg" alt="Кнопка закрытия модального окна">
             </button>
         </div>

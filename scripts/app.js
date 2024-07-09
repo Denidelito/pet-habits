@@ -16,6 +16,7 @@ const page = {
         taskAdd: document.querySelector('.task__list-add')
     },
     modal: {
+        coverBg: document.querySelector('.cover-bg'),
         btnClose: document.querySelector('.modal__button-close'),
         form: document.querySelector('.modal__form'),
     }
@@ -25,6 +26,10 @@ const page = {
 function loadData () {
  const habitsString = localStorage.getItem(HABITS_KEY);
  const habitsArray = JSON.parse(habitsString);
+
+ if (habitsArray.length < 0) {
+     toggleModal();
+ }
 
  if (Array.isArray(habitsArray)) {
      habits = habitsArray;
@@ -102,11 +107,11 @@ function rerenderBody(activeHabit) {
 function rerenderTask(habit) {
     const habitDays = habit.days;
 
+    page.body.tasksList.innerHTML  = '';
+
     if (habitDays.length === 0)  {
         return
     }
-
-    page.body.tasksList.innerHTML  = '';
 
     for  (let habitIndex = habitDays.length; habitIndex > 0; habitIndex--) {
         const habitDay = habitDays[habitIndex - 1];
@@ -192,8 +197,40 @@ function removeTask(habitIndex) {
     saveData();
 }
 
-function modal() {
+function addHabit() {
+    event.preventDefault();
 
+    const form = event.target;
+    const data = new FormData(event.target);
+    const id = habits[habits.length - 1].id + 1
+    const icon = data.get('icon');
+    const name = data.get('name');
+    const target = data.get('target');
+
+    if (!name && !target) {
+        return
+    }
+    const habit = {
+        id,
+        icon,
+        name,
+        target,
+        days: []
+    }
+
+    habits.push(habit);
+    rerender(id);
+    saveData();
+}
+
+function toggleModal() {
+    const bg = page.modal.coverBg;
+
+    if (bg.classList.contains('cover-bg_hidden')) {
+        bg.classList.remove('cover-bg_hidden');
+    } else {
+        bg.classList.add('cover-bg_hidden');
+    }
 }
 
 /* init */
