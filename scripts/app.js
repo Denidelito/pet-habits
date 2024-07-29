@@ -27,7 +27,7 @@ function loadData () {
  const habitsString = localStorage.getItem(HABITS_KEY);
  const habitsArray = JSON.parse(habitsString);
 
- if (habitsArray.length < 0) {
+ if (!habitsArray) {
      toggleModal();
  }
 
@@ -181,28 +181,13 @@ function addTask() {
     saveData();
 }
 
-function removeTask(habitIndex) {
-    habits = habits.map(habit => {
-        if (habit.id === globalHabitId)  {
-            return {
-                ...habit,
-                days: habit.days.splice(habitIndex  -  1, 1)
-            }
-        }
-
-        return habit;
-    })
-
-    rerender(globalHabitId);
-    saveData();
-}
-
 function addHabit() {
     event.preventDefault();
 
+    console.log(habits.length)
     const form = event.target;
     const data = new FormData(event.target);
-    const id = habits[habits.length - 1].id + 1
+    const id = habits.length !== 0 ? habits[habits.length - 1]?.id + 1 : 0;
     const icon = data.get('icon');
     const name = data.get('name');
     const target = data.get('target');
@@ -219,7 +204,24 @@ function addHabit() {
     }
 
     habits.push(habit);
+    toggleModal();
     rerender(id);
+    saveData();
+}
+
+function removeTask(habitIndex) {
+    habits = habits.map(habit => {
+        if (habit.id === globalHabitId)  {
+            return {
+                ...habit,
+                days: habit.days.splice(habitIndex  -  1, 1)
+            }
+        }
+
+        return habit;
+    })
+
+    rerender(globalHabitId);
     saveData();
 }
 
@@ -236,5 +238,5 @@ function toggleModal() {
 /* init */
 (() => {
     loadData();
-    rerender(1);
+    rerender(0);
 })();
